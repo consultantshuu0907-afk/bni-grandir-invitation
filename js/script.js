@@ -32,12 +32,12 @@ document.addEventListener('DOMContentLoaded', () => {
         // 便箋スライドダウン表示
         setTimeout(() => {
             if (letter) letter.classList.add('active');
-        }, 500);
+        }, 650);
 
         // キラキラ（envelope基準）
         setTimeout(() => {
             burstSparkles(sparkles, 32);
-        }, 600);
+        }, 750);
 
         // ヒント非表示
         if (envHint) {
@@ -45,17 +45,17 @@ document.addEventListener('DOMContentLoaded', () => {
             envHint.style.pointerEvents = 'none';
         }
 
-        // 便箋が見えるようにスクロール
+        // 便箋が見えるようにスクロール（フタが開ききる頃にゆっくり）
         setTimeout(() => {
             if (letter) {
                 letter.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
-        }, 1000);
+        }, 1800);
 
         // 開封後にスクロール誘導インジケーターを表示
         setTimeout(() => {
             if (scrollCue) scrollCue.classList.add('show');
-        }, 1400);
+        }, 2600);
     }
 
     // ページをある程度スクロールしたら誘導を消す
