@@ -1766,10 +1766,16 @@ em { font-style: italic; }
     .env-card { padding: 22px 10px 0; }
     .env-area { padding: 18px 14px 26px; }
 
-    /* 封筒の比率をスマホ幅に最適化（フラップ先端と封蝋を合わせる） */
-    .env-body { min-height: 256px; }
-    .env-flap { height: 160px; }
-    .env-face { padding: 116px 16px 26px; min-height: 256px; }
+    /* 封筒は横長を維持（内容を圧縮して縦長化を防ぐ） */
+    .env-body { min-height: 0; }
+    .env-flap { height: 104px; }
+    .env-face { padding: 62px 16px 20px; min-height: 0; }
+    .env-seal { width: 74px; height: 72px; margin-bottom: 8px; }
+    /* スマホでは下2行を省いて高さを抑える */
+    .env-text__to,
+    .env-text__event { display: none; }
+    .env-text__receive { font-size: 1.12rem; margin-bottom: 2px; }
+    .env-text__invitation { font-size: .95rem; margin-bottom: 0; }
 
     .card-top-bar { padding: 16px 0 12px; }
     .card-bni-logo { font-size: 1.3rem; letter-spacing: 3px; }
@@ -1833,11 +1839,12 @@ em { font-style: italic; }
 
 /* 細い端末（iPhone SE など）向けの追い込み */
 @media (max-width: 380px) {
-    .env-flap { height: 146px; }
-    .env-face { padding: 104px 14px 24px; }
-    .env-body { min-height: 238px; }
+    .env-flap { height: 94px; }
+    .env-face { padding: 56px 14px 18px; }
 
-    .env-seal { width: 82px; height: 80px; }
+    .env-seal { width: 66px; height: 64px; }
+    .env-text__receive { font-size: 1.04rem; }
+    .env-text__invitation { font-size: .9rem; }
 
     .countdown-timer { gap: 4px; }
     .cd-unit { min-width: 48px; padding: 11px 6px; }
