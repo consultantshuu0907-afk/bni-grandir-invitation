@@ -1762,11 +1762,36 @@ em { font-style: italic; }
     .env-decor--left,
     .env-decor--right { display: none; }
 
-    .apply-btn { font-size: .9rem; padding: 15px 28px; gap: 8px; }
-    .apply-btn--large { font-size: 1rem; padding: 18px 32px; }
+    /* 外周の余白をスマホ向けに圧縮 */
+    .env-card { padding: 22px 10px 0; }
+    .env-area { padding: 18px 14px 26px; }
 
-    .cd-unit { padding: 12px 10px; min-width: 60px; }
-    .cd-num  { font-size: 1.8rem; }
+    /* 封筒の比率をスマホ幅に最適化（フラップ先端と封蝋を合わせる） */
+    .env-body { min-height: 256px; }
+    .env-flap { height: 160px; }
+    .env-face { padding: 116px 16px 26px; min-height: 256px; }
+
+    .card-top-bar { padding: 16px 0 12px; }
+    .card-bni-logo { font-size: 1.3rem; letter-spacing: 3px; }
+    .card-bni-logo em { font-size: 1.6rem; }
+
+    .copy-section { padding: 48px 20px 16px; }
+    .desc-section { padding: 12px 20px 8px; }
+    .info-section { padding: 12px 20px 26px; }
+    .countdown-section { padding: 12px 16px 36px; }
+    .apply-section { padding: 8px 20px 44px; }
+    .speakers-section { padding: 8px 16px 48px; }
+    .about-section { padding: 56px 18px; }
+    .bottom-cta { padding: 64px 18px 72px; }
+
+    .apply-btn { font-size: .9rem; padding: 15px 26px; gap: 8px; }
+    .apply-btn--large { font-size: 1rem; padding: 17px 30px; }
+
+    /* カウントダウンを横一列に収める */
+    .countdown-timer { gap: 5px; }
+    .cd-unit { padding: 12px 8px; min-width: 54px; }
+    .cd-num  { font-size: 1.7rem; letter-spacing: 1px; }
+    .cd-colon { font-size: 1.4rem; margin-bottom: 18px; }
 
     .card-outer .corner-bl,
     .card-outer .corner-br,
@@ -1780,8 +1805,9 @@ em { font-style: italic; }
         flex-direction: column;
         text-align: center;
         gap: 18px;
-        padding: 28px 22px;
+        padding: 26px 20px;
     }
+    .speaker-card__photo { width: 132px; height: 132px; }
     .speaker-card__name {
         font-size: 1.12rem;
     }
@@ -1803,4 +1829,21 @@ em { font-style: italic; }
     .text-break {
         display: none;
     }
+}
+
+/* 細い端末（iPhone SE など）向けの追い込み */
+@media (max-width: 380px) {
+    .env-flap { height: 146px; }
+    .env-face { padding: 104px 14px 24px; }
+    .env-body { min-height: 238px; }
+
+    .env-seal { width: 82px; height: 80px; }
+
+    .countdown-timer { gap: 4px; }
+    .cd-unit { min-width: 48px; padding: 11px 6px; }
+    .cd-num  { font-size: 1.5rem; }
+    .cd-colon { font-size: 1.2rem; }
+    .cd-label { font-size: .55rem; }
+
+    .copy-section__title { letter-spacing: .06em; }
 }
