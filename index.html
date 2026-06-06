@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="BNI GRANDIRチャプター 特別招待状 — 定例会へご招待">
+    <title>BNI GRANDIR | 特別招待状</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;700&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- 背景に舞うゴールドパーティクル -->
+<div class="bg-particles" id="bgParticles" aria-hidden="true"></div>
+
+<div class="page">
+
+    <!-- ========== 封筒カード ========== -->
+    <section class="env-card" id="envCard">
+
+        <!-- カード外枠 -->
+        <div class="card-outer">
+            <!-- 四隅装飾 -->
+            <div class="corner-tl"></div>
+            <div class="corner-tr"></div>
+            <div class="corner-bl"></div>
+            <div class="corner-br"></div>
+            <!-- 上部 BNIロゴ帯 -->
+            <div class="card-top-bar">
+                <span class="card-bni-logo">BN<em>i GRANDIR</em></span>
+            </div>
+
+            <!-- 封筒本体 -->
+            <div class="env-area" id="envArea">
+
+                <!-- 封筒ブロック全体（封筒＋便箋をまとめて管理） -->
+                <div class="env-block">
+
+                    <!-- 封筒ビジュアル（クリックで開封） -->
+                    <div class="envelope" id="envelope" role="button" tabindex="0" aria-label="封筒をタップして開封">
+                        <!-- 封筒の外枠飾り -->
+                        <div class="env-decor env-decor--tl"></div>
+                        <div class="env-decor env-decor--tr"></div>
+                        <div class="env-decor env-decor--bl"></div>
+                        <div class="env-decor env-decor--br"></div>
+                        <div class="env-decor env-decor--left">PREMI</div>
+                        <div class="env-decor env-decor--right">TION</div>
+
+                        <!-- 封筒本体 -->
+                        <div class="env-body">
+                            <div class="env-flap" id="envFlap"></div>
+                            <div class="env-face">
+                                <!-- 封蝋シール -->
+                                <div class="env-seal" id="envSeal">
+                                    <div class="env-seal__ring">
+                                        <svg class="env-seal__crest" viewBox="0 0 100 100" aria-hidden="true">
+                                            <!-- 外周ドットリング -->
+                                            <circle cx="50" cy="50" r="42" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="1.2 4" opacity=".7"/>
+                                            <!-- 二重サークル -->
+                                            <circle cx="50" cy="50" r="37" fill="none" stroke="currentColor" stroke-width="1.4"/>
+                                            <!-- 左の月桂葉 -->
+                                            <path d="M30 70 C20 60 19 42 28 30 M30 64 C24 60 24 52 27 47 M31 55 C26 52 26 46 29 42 M33 47 C29 45 29 40 31 37"
+                                                  fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                                            <!-- 右の月桂葉（左右反転） -->
+                                            <path d="M70 70 C80 60 81 42 72 30 M70 64 C76 60 76 52 73 47 M69 55 C74 52 74 46 71 42 M67 47 C71 45 71 40 69 37"
+                                                  fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                                            <!-- 中央 BNi -->
+                                            <text x="50" y="56" text-anchor="middle" font-family="Cinzel, serif" font-weight="700" font-size="26" letter-spacing="0.5" fill="currentColor">BN<tspan font-style="italic" font-size="29">i</tspan></text>
+                                            <!-- 上部の星 -->
+                                            <path d="M50 18 l1.6 3.4 3.7.4 -2.8 2.5 .8 3.7 -3.3 -1.9 -3.3 1.9 .8 -3.7 -2.8 -2.5 3.7 -.4z" fill="currentColor"/>
+                                        </svg>
+                                    </div>
+                                </div>
+
+                                <!-- 封筒テキスト -->
+                                <div class="env-text">
+                                    <p class="env-text__receive" id="envReceive">招待状を受け取る</p>
+                                    <p class="env-text__invitation"><em>Invitation</em></p>
+                                    <p class="env-text__to">TO: BNI GRANDIR CHAPTER GUEST</p>
+                                    <p class="env-text__event">BUSINESS OPEN DAY — GRANDIR CHAPTER</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- タップヒント -->
+                        <div class="env-hint" id="envHint">
+                            <span><i class="env-hint__finger">👆</i> タップして開封 <i class="env-hint__arrow">✦</i></span>
+                        </div>
+                    </div>
+
+                    <!-- 便箋（開封後にスライドダウン） -->
+                    <div class="letter" id="letter">
+                        <div class="letter__inner">
+                            <p class="letter__logo">BN<em>i</em> <strong>GRANDIR</strong> — Business Open Day</p>
+                            <h3>特別見学会のご案内</h3>
+                            <p>この度は心よりご招待申し上げます。<br>下記のボタンよりご参加をお申し込みください。</p>
+                            <ul class="letter__info">
+                                <li><span>📅</span><div><strong>開催日</strong><span>2026年7月3日（金）</span></div></li>
+                                <li><span>🕘</span><div><strong>時間</strong><span>AM 9:15 〜 AM 11:15</span></div></li>
+                                <li><span>📹</span><div><strong>形式</strong><span>オンライン（ZOOM）</span></div></li>
+                                <li><span>💴</span><div><strong>会費</strong><span>1,000円（当日）</span></div></li>
+                            </ul>
+                            <a href="https://forms.gle/XXXXXXXXXXXXXXXXX" target="_blank" rel="noopener noreferrer" class="letter__btn">✉ 参加申し込みへ進む →</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- 開封後のスクロール誘導 -->
+        <div class="scroll-cue" id="scrollCue" aria-hidden="true">
+            <span class="scroll-cue__text">下へスクロール</span>
+            <span class="scroll-cue__chevron"></span>
+        </div>
+    </section>
+
+    <!-- ========== メインコピー ========== -->
+    <section class="copy-section">
+        <p class="copy-section__eyebrow">あなたのビジネスを拡大加速させる</p>
+        <h1 class="copy-section__title">特別招待状</h1>
+    </section>
+
+    <!-- ========== 説明文 ========== -->
+    <section class="desc-section">
+        <p class="desc-section__lead">世界最大級のビジネス・リファーラル組織</p>
+        <p class="desc-section__highlight">BNI GRANDIRチャプターの定例会へご招待</p>
+    </section>
+
+    <!-- ========== 開催情報 ========== -->
+    <section class="info-section">
+        <div class="info-row">
+            <span class="info-icon">📅</span>
+            <span class="info-text">毎週金曜日 <strong>AM9:15〜AM11:15</strong></span>
+        </div>
+        <div class="info-row">
+            <span class="info-icon">📹</span>
+            <span class="info-text">オンライン(ZOOM)　<span class="info-yen">¥</span>　会費1,000円</span>
+        </div>
+    </section>
+
+    <!-- ========== カウントダウン ========== -->
+    <section class="countdown-section">
+        <p class="countdown-section__label">開催まであと</p>
+        <div class="countdown-timer" id="countdown">
+            <div class="cd-unit">
+                <span class="cd-num" id="cd-days">--</span>
+                <span class="cd-label">日</span>
+            </div>
+            <span class="cd-colon">:</span>
+            <div class="cd-unit">
+                <span class="cd-num" id="cd-hours">--</span>
+                <span class="cd-label">時間</span>
+            </div>
+            <span class="cd-colon">:</span>
+            <div class="cd-unit">
+                <span class="cd-num" id="cd-mins">--</span>
+                <span class="cd-label">分</span>
+            </div>
+            <span class="cd-colon">:</span>
+            <div class="cd-unit">
+                <span class="cd-num" id="cd-secs">--</span>
+                <span class="cd-label">秒</span>
+            </div>
+        </div>
+        <p class="countdown-section__date">2026年7月3日（金）AM 9:15 開催</p>
+    </section>
+
+    <!-- ========== 申込ボタン（Googleフォームへ移動） ========== -->
+    <section class="apply-section" id="apply">
+        <a href="https://forms.gle/XXXXXXXXXXXXXXXXX" target="_blank" rel="noopener noreferrer" class="apply-btn">
+            <span class="apply-btn__icon">✉</span>
+            <span class="apply-btn__text">仕事の幅を広げる（1,000円）</span>
+            <span class="apply-btn__arrow">→</span>
+        </a>
+    </section>
+
+    <!-- ========== 当日のシェアストーリー登壇者 ========== -->
+    <section class="speakers-section" id="speakers">
+        <p class="speakers-section__label">TODAY'S SHARE STORY</p>
+        <h2 class="speakers-section__title">当日お話しいただく方</h2>
+        <p class="speakers-section__lead">
+            当日は、実際にBNIでビジネスを広げてきたメンバーが、<br class="text-break">
+            リアルな「シェアストーリー」をお話しします。
+        </p>
+
+        <div class="speakers-grid">
+
+            <!-- 登壇者カード 1 -->
+            <article class="speaker-card">
+                <div class="speaker-card__photo is-empty">
+                    <img src="images/speaker1.jpg" alt="登壇者1"
+                         onload="this.parentNode.classList.remove('is-empty')"
+                         onerror="this.remove()">
+                    <span class="speaker-card__ph-label">写真が<br>入ります</span>
+                </div>
+                <div class="speaker-card__content">
+                    <h3 class="speaker-card__name">お名前が入ります</h3>
+                    <p class="speaker-card__episode">ここに紹介文が入ります</p>
+                </div>
+            </article>
+
+            <!-- 登壇者カード 2 -->
+            <article class="speaker-card">
+                <div class="speaker-card__photo is-empty">
+                    <img src="images/speaker2.jpg" alt="登壇者2"
+                         onload="this.parentNode.classList.remove('is-empty')"
+                         onerror="this.remove()">
+                    <span class="speaker-card__ph-label">写真が<br>入ります</span>
+                </div>
+                <div class="speaker-card__content">
+                    <h3 class="speaker-card__name">お名前が入ります</h3>
+                    <p class="speaker-card__episode">ここに紹介文が入ります</p>
+                </div>
+            </article>
+
+        </div>
+    </section>
+
+    <!-- ========== ここから下：追加コンテンツ ========== -->
+
+    <!-- BODについて -->
+    <section class="about-section">
+        <div class="about-section__inner">
+            <p class="about-section__label">ABOUT BOD</p>
+            <h2 class="about-section__title">Business Open Day とは</h2>
+            <div class="about-section__body">
+                <p>
+                    BNI の Business Open Day は、<br class="text-break">
+                    <strong>本気でビジネスを伸ばしたい</strong>経営者・個人事業主のための特別体験会です。
+                </p>
+                <p>
+                    <strong>いつもの例会とは、ひと味違う特別な一日。</strong><br class="text-break">
+                    BNIのネットワーク力を、実際に肌で感じていただけます。
+                </p>
+                <p>
+                    「どうビジネスを加速・拡大させるか」を、<br class="text-break">
+                    <strong>参加者全員で本気で高め合う</strong>場です。
+                </p>
+                <p>
+                    この招待状は、メンバーが「信頼できる」と判断した方にのみお届けしています。
+                </p>
+            </div>
+
+            <div class="about-points">
+                <div class="about-point">
+                    <span class="about-point__icon">🔒</span>
+                    <h3>紹介制・完全限定</h3>
+                    <p>誰でも参加できるイベントではありません。メンバーが確信した方にのみお届けする招待状です。</p>
+                </div>
+                <div class="about-point">
+                    <span class="about-point__icon">📈</span>
+                    <h3>売上直結のネットワーク</h3>
+                    <p>メンバー同士が質の高い紹介を送り合い、参加翌月から成約に至る事例も多数あります。</p>
+                </div>
+                <div class="about-point">
+                    <span class="about-point__icon">🤝</span>
+                    <h3>信頼だけが通貨</h3>
+                    <p>「Givers Gain（与える者が得る）」の精神で動く、プロフェッショナルだけのコミュニティです。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- ========== 最下部CTA ========== -->
+    <section class="bottom-cta" id="bottom-cta">
+        <span class="bottom-cta__topline"></span>
+        <div class="bottom-cta__inner">
+            <div class="bottom-cta__deco">✦</div>
+            <p class="bottom-cta__eyebrow">— あなたの参加を待っています —</p>
+            <h2 class="bottom-cta__title">まず一歩、踏み出してみてください。</h2>
+            <p class="bottom-cta__body">
+                BNI GRANDIRチャプターのBusiness Open Dayは、<br class="text-break">
+                <strong>本気でビジネスを伸ばしたい方だけ</strong>のための場所です。<br class="text-break">
+                参加後の強制入会・勧誘は一切ありません。
+            </p>
+            <div class="bottom-cta__info">
+                <span>📅 2026年7月3日（金）</span>
+                <span>🕘 AM 9:15〜11:15</span>
+                <span>📹 オンライン（ZOOM）</span>
+                <span>💴 会費 1,000円</span>
+            </div>
+            <a href="https://forms.gle/XXXXXXXXXXXXXXXXX" target="_blank" rel="noopener noreferrer" class="apply-btn apply-btn--large">
+                <span class="apply-btn__icon">✉</span>
+                <span class="apply-btn__text">参加申し込み（1,000円）</span>
+                <span class="apply-btn__arrow">→</span>
+            </a>
+            <p class="bottom-cta__note">※ 定員になり次第、受付を終了します</p>
+        </div>
+    </section>
+
+    <!-- フッター -->
+    <footer class="footer">
+        <span class="card-bni-logo">BN<em>i</em></span>
+        <span class="footer__chapter">GRANDIR Chapter</span>
+        <p class="footer__copy">© 2024 BNI GRANDIR Chapter. All Rights Reserved.</p>
+    </footer>
+
+</div><!-- /.page -->
+
+<script src="js/script.js"></script>
+</body>
+</html>

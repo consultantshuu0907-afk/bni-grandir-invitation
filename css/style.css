@@ -1,0 +1,1806 @@
+/* ============================================================
+   BNI GRANDIR | 特別招待状 — Ivory / Cream Realism Edition
+   薄いクリーム色基調 ＋ 本物の紙の封筒
+   ============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+    /* ベース：アイボリー／クリーム */
+    --bg:        #f3ecdd;   /* ページ背景 */
+    --bg-2:      #efe5d2;
+    --paper:     #f6efe1;   /* 封筒・台紙の紙色 */
+    --paper-d:   #e7dabf;   /* 紙の影・折り目 */
+    --paper-dd:  #d9c9a7;
+    --ivory:     #fbf6ec;   /* 便箋 */
+
+    /* インク（文字色） */
+    --ink:       #4a4031;
+    --ink-soft:  #6f6553;
+    --ink-faint: #9c9180;
+
+    /* アクセント：ボルドー＆ゴールド */
+    --burgundy:  #7c1d22;
+    --burgundy-d:#5d1318;
+    --gold:      #b18d3c;
+    --gold-d:    #8a6c27;
+    --gold-l:    #cda94f;
+    --gold-line: rgba(177,141,60,.45);
+
+    --f-sans:   'Noto Sans JP', sans-serif;
+    --f-serif:  'Noto Serif JP', serif;
+    --f-en:     'Cinzel', serif;
+}
+
+html { scroll-behavior: smooth; }
+
+/* ============================================================
+   ボディ — 柔らかなクリーム紙背景
+   ============================================================ */
+body {
+    font-family: var(--f-sans);
+    background-color: var(--bg);
+    background-image:
+        /* 微細な紙ノイズ */
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"),
+        /* 上部の柔らかな光 */
+        radial-gradient(ellipse 120% 50% at 50% -8%,
+            rgba(255,255,255,.7) 0%,
+            rgba(255,250,240,.35) 38%,
+            transparent 72%),
+        /* 下部のほんのり温かい沈み */
+        radial-gradient(ellipse 100% 55% at 50% 108%,
+            rgba(214,196,160,.40) 0%,
+            transparent 64%),
+        /* ベースグラデーション */
+        linear-gradient(165deg, #f7f1e4 0%, #f1e8d6 46%, #ece1cb 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+    color: var(--ink);
+    overflow-x: hidden;
+}
+
+.page {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 0 60px;
+}
+
+em { font-style: italic; }
+
+/* ============================================================
+   封筒カードセクション
+   ============================================================ */
+.env-card {
+    padding: 32px 16px 0;
+}
+
+/* ============================================================
+   カード外枠 — 上質なクリーム台紙
+   ============================================================ */
+.card-outer {
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow:
+        0 0 0 1px rgba(177,141,60,.22),
+        0 2px 4px rgba(120,95,45,.10),
+        0 12px 26px rgba(120,95,45,.16),
+        0 28px 60px rgba(120,95,45,.12),
+        inset 0 1px 0 rgba(255,255,255,.7);
+
+    background:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E"),
+        linear-gradient(135deg,
+            rgba(255,255,255,.55) 0%,
+            rgba(255,255,255,.12) 26%,
+            transparent 50%),
+        linear-gradient(160deg,
+            #faf4e8 0%,
+            #f4ecda 42%,
+            #efe5cf 78%,
+            #e9ddc3 100%);
+
+    border: 1px solid rgba(177,141,60,.42);
+}
+
+/* カード外周の二重罫線 */
+.card-outer::before {
+    content: '';
+    position: absolute;
+    inset: 5px;
+    border: 1px solid rgba(177,141,60,.28);
+    border-radius: 7px;
+    pointer-events: none;
+    z-index: 10;
+}
+/* 上部の柔らかな光反射 */
+.card-outer::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 40%;
+    background:
+        linear-gradient(180deg,
+            rgba(255,255,255,.45) 0%,
+            rgba(255,255,255,.10) 42%,
+            transparent 100%);
+    border-radius: 10px 10px 0 0;
+    pointer-events: none;
+    z-index: 9;
+}
+
+/* 四隅の角飾り */
+.card-outer .corner-bl,
+.card-outer .corner-br {
+    position: absolute;
+    width: 44px; height: 44px;
+    border-color: var(--gold);
+    border-style: solid;
+    z-index: 11;
+    pointer-events: none;
+    bottom: 14px;
+    opacity: .7;
+}
+.card-outer .corner-bl { left: 14px;  border-width: 0 0 1.5px 1.5px; }
+.card-outer .corner-br { right: 14px; border-width: 0 1.5px 1.5px 0; }
+
+.corner-tl, .corner-tr {
+    position: absolute;
+    width: 44px; height: 44px;
+    border-color: var(--gold);
+    border-style: solid;
+    z-index: 11;
+    pointer-events: none;
+    top: 14px;
+    opacity: .7;
+}
+.corner-tl { left: 14px;  border-width: 1.5px 0 0 1.5px; }
+.corner-tr { right: 14px; border-width: 1.5px 1.5px 0 0; }
+
+/* ============================================================
+   ロゴ帯
+   ============================================================ */
+.card-top-bar {
+    position: relative;
+    background:
+        linear-gradient(180deg,
+            rgba(255,255,255,.5) 0%,
+            rgba(255,255,255,0) 100%);
+    text-align: center;
+    padding: 20px 0 14px;
+    border-bottom: 1px solid rgba(177,141,60,.25);
+}
+.card-top-bar::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 10%; right: 10%;
+    height: 1px;
+    background: linear-gradient(90deg,
+        transparent, rgba(177,141,60,.45) 30%,
+        rgba(177,141,60,.75) 50%,
+        rgba(177,141,60,.45) 70%, transparent);
+}
+
+.card-bni-logo {
+    font-family: var(--f-en);
+    font-size: 1.5rem;
+    font-weight: 900;
+    letter-spacing: 4px;
+    background: linear-gradient(150deg,
+        #b78a2e 0%, #d8b455 22%, #9a7415 42%, #e3c468 58%, #a87d1c 78%, #6e4d11 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 1px 0 rgba(255,255,255,.6));
+}
+.card-bni-logo em {
+    font-style: italic;
+    font-size: 1.85rem;
+}
+
+/* ============================================================
+   封筒エリア
+   ============================================================ */
+.env-area {
+    position: relative;
+    padding: 28px 28px 34px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.env-block {
+    position: relative;
+    width: 100%;
+    max-width: 560px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+}
+
+/* サイドテキスト装飾 */
+.env-decor {
+    position: absolute;
+    pointer-events: none;
+    z-index: 1;
+}
+.env-decor--left,
+.env-decor--right {
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: var(--f-en);
+    font-size: .6rem;
+    font-weight: 700;
+    letter-spacing: 3.5px;
+    color: rgba(235,200,140,.6);
+    border: 1px solid rgba(235,200,140,.28);
+    padding: 7px 9px;
+    border-radius: 2px;
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    background: linear-gradient(160deg, rgba(255,220,150,.10), rgba(20,4,8,.30));
+}
+.env-decor--left  { left: 2px; }
+.env-decor--right { right: 2px; }
+
+/* 四隅モチーフ */
+.env-decor--tl,.env-decor--tr,.env-decor--bl,.env-decor--br {
+    width: 20px; height: 20px;
+    border-color: rgba(177,141,60,.55);
+    border-style: solid;
+}
+.env-decor--tl { top:6px;   left:6px;   border-width:1px 0 0 1px; }
+.env-decor--tr { top:6px;   right:6px;  border-width:1px 1px 0 0; }
+.env-decor--bl { bottom:6px;left:6px;   border-width:0 0 1px 1px; }
+.env-decor--br { bottom:6px;right:6px;  border-width:0 1px 1px 0; }
+
+/* ============================================================
+   封筒本体 — 本物の紙の封筒（アイボリー）
+   ============================================================ */
+.envelope {
+    position: relative;
+    width: 100%;
+    cursor: pointer;
+    outline: none;
+    z-index: 2;
+    /* 紙が机に置かれて自然に落ちる影 */
+    filter: drop-shadow(0 10px 20px rgba(120,90,40,.22))
+            drop-shadow(0 3px 6px rgba(120,90,40,.16));
+    transition: filter .3s ease, transform .3s ease;
+}
+.envelope:hover {
+    filter: drop-shadow(0 16px 30px rgba(120,90,40,.28))
+            drop-shadow(0 4px 8px rgba(120,90,40,.18));
+    transform: translateY(-2px);
+}
+.envelope.opened {
+    filter: drop-shadow(0 8px 16px rgba(120,90,40,.2));
+    transform: translateY(0);
+}
+
+/* タップヒント — 金ピルバッジ */
+.env-hint {
+    display: flex;
+    justify-content: center;
+    margin-top: 18px;
+    transition: opacity .5s ease;
+    animation: hintBounce 1.6s ease-in-out infinite;
+}
+.env-hint span {
+    position: relative;
+    overflow: hidden;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: .95rem;
+    font-weight: 700;
+    letter-spacing: .08em;
+    color: #3a2400;
+    padding: 11px 26px;
+    border-radius: 100px;
+    border: 1.5px solid rgba(255,235,160,.9);
+
+    background: linear-gradient(135deg,
+        #a8851f 0%,
+        #c99a2e 20%,
+        #f0d565 45%,
+        #fff0a8 50%,
+        #f0d565 55%,
+        #c99a2e 80%,
+        #a8851f 100%);
+
+    box-shadow:
+        0 4px 14px rgba(150,115,30,.4),
+        0 0 18px rgba(216,182,96,.4),
+        inset 0 1px 0 rgba(255,255,255,.6),
+        inset 0 -2px 4px rgba(120,80,0,.3);
+
+    animation: hintGlow 1.6s ease-in-out infinite,
+               hintPulse 1.6s ease-in-out infinite;
+}
+
+.env-hint span::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -120%;
+    width: 70%; height: 100%;
+    background: linear-gradient(105deg,
+        transparent 0%,
+        rgba(255,255,255,.0) 30%,
+        rgba(255,255,255,.85) 50%,
+        rgba(255,255,255,.0) 70%,
+        transparent 100%);
+    transform: skewX(-20deg);
+    animation: hintShimmer 2.2s ease-in-out infinite;
+    pointer-events: none;
+}
+
+.env-hint__finger {
+    font-style: normal;
+    display: inline-block;
+    animation: fingerTap 1s ease-in-out infinite;
+}
+@keyframes fingerTap {
+    0%,100% { transform: translateY(0) scale(1); }
+    50%      { transform: translateY(3px) scale(.85); }
+}
+
+.env-hint__arrow {
+    font-style: normal;
+    display: inline-block;
+    font-size: .8rem;
+    animation: arrowSpin 1.8s linear infinite;
+}
+@keyframes arrowSpin {
+    0%   { transform: rotate(0deg)   scale(1);   opacity: .7; }
+    50%  { transform: rotate(180deg) scale(1.3); opacity: 1; }
+    100% { transform: rotate(360deg) scale(1);   opacity: .7; }
+}
+
+.envelope.opened .env-hint {
+    opacity: 0;
+    pointer-events: none;
+}
+@keyframes hintBounce {
+    0%,100% { transform: translateY(0); }
+    50%      { transform: translateY(-9px); }
+}
+@keyframes hintPulse {
+    0%,100% { transform: scale(1); }
+    50%      { transform: scale(1.06); }
+}
+@keyframes hintShimmer {
+    0%   { left: -120%; }
+    55%  { left: 130%; }
+    100% { left: 130%; }
+}
+@keyframes hintGlow {
+    0%,100% { box-shadow:
+        0 4px 14px rgba(150,115,30,.4),
+        0 0 16px rgba(216,182,96,.4),
+        inset 0 1px 0 rgba(255,255,255,.6),
+        inset 0 -2px 4px rgba(120,80,0,.3); }
+    50%      { box-shadow:
+        0 6px 20px rgba(150,115,30,.5),
+        0 0 34px rgba(255,220,100,.7),
+        inset 0 1px 0 rgba(255,255,255,.7),
+        inset 0 -2px 4px rgba(120,80,0,.3); }
+}
+
+/* 封筒本体ボックス — ワインレッドのマット紙（本物の封筒） */
+.env-body {
+    position: relative;
+    border-radius: 6px;
+    border: 1px solid rgba(40,8,14,.55);
+    overflow: hidden;
+
+    background:
+        /* 紙の繊維ノイズ（マットな質感） */
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)' opacity='0.07'/%3E%3C/svg%3E"),
+        /* 下フラップ（V字）の継ぎ目：中央下へ集まる紙の折り */
+        linear-gradient(to top right,
+            transparent calc(50% - .7px),
+            rgba(20,4,8,.45) 50%,
+            transparent calc(50% + .7px)) left bottom / 50% 56% no-repeat,
+        linear-gradient(to top left,
+            transparent calc(50% - .7px),
+            rgba(20,4,8,.45) 50%,
+            transparent calc(50% + .7px)) right bottom / 50% 56% no-repeat,
+        /* 控えめな上部のパール光沢 */
+        radial-gradient(ellipse 120% 60% at 50% -8%,
+            rgba(190,90,100,.30) 0%,
+            rgba(140,40,55,.10) 32%,
+            transparent 66%),
+        /* ワインレッドのマット地 */
+        linear-gradient(160deg,
+            #7a2230 0%,
+            #641826 34%,
+            #4f1019 66%,
+            #3c0a13 100%);
+
+    /* 紙の厚みと自然なエッジ影 */
+    box-shadow:
+        inset 0 1px 0 rgba(255,180,170,.18),
+        inset 0 -26px 40px rgba(10,2,4,.40),
+        inset 0 0 60px rgba(10,2,4,.25),
+        0 2px 4px rgba(40,8,14,.30);
+
+    padding: 0;
+    min-height: 300px;
+}
+
+/* 下フラップ面のほんのりした陰影 */
+.env-body::before {
+    content: '';
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 50%;
+    background:
+        radial-gradient(ellipse 80% 90% at 50% 100%,
+            rgba(10,2,4,.30) 0%,
+            transparent 64%);
+    pointer-events: none;
+    z-index: 1;
+}
+/* 上部の柔らかな反射 */
+.env-body::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 34%;
+    background: linear-gradient(180deg,
+        rgba(255,200,190,.10) 0%,
+        transparent 100%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* 上フラップ（大きな尖りフラップ・閉じた状態）— 写真の形 */
+.env-flap {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 190px;
+    background:
+        /* マット紙：上がやや明るく先端へ陰る */
+        linear-gradient(180deg,
+            #7e2533 0%,
+            #6a1b29 46%,
+            #56131e 80%,
+            #481019 100%);
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    transform-origin: top center;
+    transition: transform .75s cubic-bezier(.25,.46,.45,.94);
+    z-index: 2;
+    /* フラップが本体に落とす影 */
+    filter: drop-shadow(0 6px 7px rgba(20,4,8,.40));
+}
+/* フラップ斜辺の折り目ハイライト＆影 */
+.env-flap::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        /* 左斜辺：内側に細いハイライト＋外に影 */
+        linear-gradient(to bottom right,
+            rgba(255,170,160,.0) 48.8%,
+            rgba(255,180,170,.28) 49.7%,
+            rgba(20,4,8,.30) 50.3%,
+            rgba(20,4,8,.0) 51.2%),
+        /* 右斜辺 */
+        linear-gradient(to bottom left,
+            rgba(255,170,160,.0) 48.8%,
+            rgba(255,180,170,.28) 49.7%,
+            rgba(20,4,8,.30) 50.3%,
+            rgba(20,4,8,.0) 51.2%),
+        /* 上端の明るい折り目 */
+        linear-gradient(180deg,
+            rgba(255,190,180,.30) 0%,
+            transparent 7%);
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    pointer-events: none;
+}
+.envelope.opened .env-flap {
+    transform: rotateX(180deg) scaleY(-1);
+}
+
+/* 封筒面 — 封蝋をフラップ先端（中央）に重ねる */
+.env-face {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 148px 24px 30px;
+    min-height: 300px;
+    justify-content: flex-start;
+    gap: 6px;
+}
+
+/* ============================================================
+   封蝋シール — 赤い本物の封蝋（クリーム紙に映える）
+   ============================================================ */
+.env-seal {
+    position: relative;
+    width: 94px;
+    height: 92px;
+    margin-bottom: 12px;
+    transition: transform .5s ease, opacity .4s ease;
+
+    /* 蝋がスタンプで押し出された不規則なギザギザ縁 */
+    clip-path: polygon(
+        50% 1%,   61% 5%,   68% 2%,   74% 9%,   84% 8%,
+        86% 17%,  94% 22%,  91% 31%,  99% 39%,  93% 46%,
+        98% 55%,  90% 61%,  94% 71%,  85% 74%,  84% 84%,
+        74% 84%,  68% 92%,  60% 87%,  51% 96%,  43% 88%,
+        35% 93%,  29% 84%,  18% 85%,  17% 75%,  8% 71%,
+        12% 61%,  3% 54%,   9% 46%,   2% 38%,   10% 31%,
+        6% 21%,   15% 18%,  16% 8%,   26% 9%,   31% 2%,
+        39% 6%
+    );
+
+    background:
+        url("../images/realistic-wax-seal-gold.svg") center / cover no-repeat,
+        radial-gradient(ellipse 45% 40% at 42% 38%,
+            rgba(255,235,160,.5) 0%,
+            rgba(210,160,60,.2) 35%,
+            transparent 60%),
+        radial-gradient(ellipse 70% 70% at 68% 72%,
+            rgba(40,28,4,.55) 0%,
+            transparent 55%),
+        radial-gradient(circle at 50% 48%,
+            transparent 0%,
+            transparent 56%,
+            rgba(50,34,6,.4) 62%,
+            rgba(235,195,90,.3) 70%,
+            transparent 80%),
+        radial-gradient(circle at 38% 34%,
+            #f3d36e 0%,
+            #d9ab40 20%,
+            #b3851f 44%,
+            #875f12 68%,
+            #5e400b 88%,
+            #423009 100%);
+
+    box-shadow:
+        inset 0 2px 4px rgba(255,240,180,.4),
+        inset 0 -5px 10px rgba(40,28,4,.55),
+        inset 3px 3px 8px rgba(255,235,160,.18),
+        inset -3px -3px 10px rgba(30,20,2,.5);
+
+    /* ワインレッド紙に落ちる自然な影 */
+    filter:
+        drop-shadow(0 8px 14px rgba(20,4,8,.5))
+        drop-shadow(0 3px 5px rgba(20,4,8,.4))
+        drop-shadow(0 0 14px rgba(220,180,80,.25));
+}
+
+/* 蝋の溶け出し */
+.env-seal__ring::before {
+    content: '';
+    position: absolute;
+    inset: -9px;
+    z-index: -1;
+    border-radius: 44% 56% 48% 52% / 53% 46% 54% 47%;
+    background:
+        radial-gradient(ellipse at 58% 62%,
+            rgba(120,90,20,.42) 0%,
+            rgba(85,62,12,.24) 42%,
+            rgba(60,42,8,.10) 62%,
+            transparent 78%);
+    filter: blur(3px);
+    pointer-events: none;
+}
+
+/* 蝋のツヤ */
+.env-seal::before {
+    content: '';
+    position: absolute;
+    top: 9%; left: 16%;
+    width: 34%; height: 26%;
+    border-radius: 50% 50% 55% 45%;
+    background: radial-gradient(ellipse at 38% 32%,
+        rgba(255,248,220,.8) 0%,
+        rgba(255,235,170,.35) 40%,
+        transparent 75%);
+    transform: rotate(-22deg);
+    filter: blur(.5px);
+    pointer-events: none;
+    z-index: 2;
+}
+/* 蝋のザラつき */
+.env-seal::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    clip-path: polygon(
+        50% 1%,   61% 5%,   68% 2%,   74% 9%,   84% 8%,
+        86% 17%,  94% 22%,  91% 31%,  99% 39%,  93% 46%,
+        98% 55%,  90% 61%,  94% 71%,  85% 74%,  84% 84%,
+        74% 84%,  68% 92%,  60% 87%,  51% 96%,  43% 88%,
+        35% 93%,  29% 84%,  18% 85%,  17% 75%,  8% 71%,
+        12% 61%,  3% 54%,   9% 46%,   2% 38%,   10% 31%,
+        6% 21%,   15% 18%,  16% 8%,   26% 9%,   31% 2%,
+        39% 6%
+    );
+    background:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.12'/%3E%3C/svg%3E");
+    mix-blend-mode: overlay;
+    opacity: .5;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.envelope.opened .env-seal {
+    opacity: 0;
+    transform: scale(.25) rotate(15deg);
+}
+
+.env-seal__ring {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    border: 1px solid rgba(80,40,0,.25);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+}
+.env-seal__crest {
+    position: relative;
+    z-index: 2;
+    width: 58px;
+    height: 58px;
+    color: rgba(228,184,96,.95);
+    filter:
+        drop-shadow(0 1px 0.5px rgba(255,240,180,.55))
+        drop-shadow(0 -1px 0.5px rgba(60,6,6,.6))
+        drop-shadow(0 0.5px 1.5px rgba(40,2,2,.5));
+}
+.env-seal__crest text {
+    paint-order: stroke;
+}
+
+/* ============================================================
+   封筒テキスト — インク色（クリーム紙の上）
+   ============================================================ */
+.env-text { text-align: center; }
+
+.env-text__receive {
+    font-family: var(--f-serif);
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: .1em;
+    background: linear-gradient(170deg,
+        #f7e09a 0%, #e6c468 45%, #cda94f 75%, #b18d3c 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 1px 3px rgba(20,4,8,.5));
+    margin-bottom: 4px;
+    transition: opacity .4s ease, font-size .3s ease;
+}
+.envelope.opened .env-text__receive {
+    opacity: .35;
+}
+
+.env-text__invitation {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    color: rgba(240,210,140,.85);
+    margin-bottom: 8px;
+    letter-spacing: .05em;
+    text-shadow: 0 1px 3px rgba(20,4,8,.5);
+}
+
+.env-text__to {
+    font-family: var(--f-en);
+    font-size: .52rem;
+    letter-spacing: 2.5px;
+    color: rgba(235,200,140,.62);
+    margin-bottom: 3px;
+}
+.env-text__event {
+    font-family: var(--f-en);
+    font-size: .46rem;
+    letter-spacing: 1.5px;
+    color: rgba(235,200,140,.45);
+}
+
+/* ============================================================
+   便箋（開封後スライドダウン）— 上質な白和紙
+   ============================================================ */
+.letter {
+    position: relative;
+    width: 100%;
+    border-radius: 0 0 8px 8px;
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transition:
+        max-height 1s cubic-bezier(.34,1.1,.64,1) .35s,
+        opacity    .6s ease .35s;
+
+    background:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E"),
+        linear-gradient(180deg, #fffdf8 0%, #fbf6ec 60%, #f7f0e2 100%);
+
+    box-shadow:
+        0 10px 30px rgba(120,90,40,.16),
+        0 2px 6px rgba(120,90,40,.12);
+}
+
+.letter::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg,
+        var(--burgundy) 0%,
+        var(--gold) 25%,
+        var(--gold-l) 50%,
+        var(--gold) 75%,
+        var(--burgundy) 100%);
+    z-index: 2;
+}
+
+.letter.active {
+    max-height: 660px;
+    opacity: 1;
+}
+
+.letter__inner {
+    padding: 26px 22px 22px;
+    text-align: center;
+    color: var(--ink);
+    position: relative;
+}
+
+.letter__inner::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: repeating-linear-gradient(
+        180deg,
+        transparent 0,
+        transparent 27px,
+        rgba(177,141,60,.07) 27px,
+        rgba(177,141,60,.07) 28px
+    );
+    pointer-events: none;
+    z-index: 0;
+}
+
+.letter__logo {
+    font-family: var(--f-en);
+    font-size: .78rem;
+    font-weight: 700;
+    color: var(--burgundy);
+    letter-spacing: 2.5px;
+    margin-bottom: 12px;
+    position: relative;
+    z-index: 1;
+}
+.letter__logo strong { color: var(--gold-d); }
+
+.letter__inner h3 {
+    font-family: var(--f-serif);
+    font-size: 1rem;
+    color: var(--burgundy-d);
+    margin-bottom: 10px;
+    position: relative;
+    z-index: 1;
+}
+.letter__inner > p {
+    font-size: .8rem;
+    color: var(--ink-soft);
+    line-height: 1.75;
+    margin-bottom: 14px;
+    position: relative;
+    z-index: 1;
+}
+
+.letter__info {
+    list-style: none;
+    background:
+        linear-gradient(135deg, #fffdf6 0%, #faf3e2 100%);
+    border-radius: 5px;
+    border: 1px solid rgba(177,141,60,.35);
+    padding: 10px 14px;
+    margin-bottom: 16px;
+    text-align: left;
+    position: relative;
+    z-index: 1;
+    box-shadow: inset 0 1px 3px rgba(177,141,60,.12);
+}
+.letter__info li {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 6px 0;
+    border-bottom: 1px solid rgba(177,141,60,.2);
+    font-size: .77rem;
+}
+.letter__info li:last-child { border-bottom: none; }
+.letter__info div { display: flex; flex-direction: column; gap: 1px; }
+.letter__info strong { font-size: .67rem; color: var(--burgundy-d); display: block; }
+.letter__info span   { color: var(--ink-soft); }
+
+.letter__btn {
+    display: inline-block;
+    background: linear-gradient(135deg,
+        #b8952a 0%,
+        #d4aa38 20%,
+        #e8c84a 45%,
+        #d4aa38 70%,
+        #b8952a 100%);
+    color: #3a2400;
+    text-decoration: none;
+    font-size: .83rem;
+    font-weight: 700;
+    padding: 10px 24px;
+    border-radius: 40px;
+    border: 1px solid rgba(255,220,80,.6);
+    transition: all .3s ease;
+    box-shadow:
+        0 3px 12px rgba(160,120,30,.35),
+        inset 0 1px 0 rgba(255,255,255,.45);
+    position: relative;
+    z-index: 1;
+}
+.letter__btn:hover {
+    transform: translateY(-2px);
+    box-shadow:
+        0 6px 20px rgba(160,120,30,.45),
+        inset 0 1px 0 rgba(255,255,255,.5);
+}
+
+/* ============================================================
+   スパークル
+   ============================================================ */
+.sparkles {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 5;
+}
+
+/* ============================================================
+   メインコピー — ゴールド箔タイトル
+   ============================================================ */
+.copy-section {
+    text-align: center;
+    padding: 64px 24px 20px;
+    position: relative;
+}
+.copy-section::before {
+    content: '';
+    position: absolute;
+    top: 30px; left: 50%;
+    transform: translateX(-50%);
+    width: 1px; height: 30px;
+    background: linear-gradient(180deg, transparent, rgba(177,141,60,.55));
+}
+
+.copy-section__eyebrow {
+    font-size: .88rem;
+    font-weight: 400;
+    color: var(--ink-soft);
+    letter-spacing: .16em;
+    margin-bottom: 18px;
+}
+
+/* 「特別招待状」ゴールド箔テキスト */
+.copy-section__title {
+    font-family: var(--f-serif);
+    font-size: clamp(2.8rem, 10vw, 4.4rem);
+    font-weight: 700;
+    letter-spacing: .12em;
+    line-height: 1.1;
+    position: relative;
+    display: inline-block;
+
+    background:
+        linear-gradient(105deg,
+            #6e470b 0%,
+            #b78a2e 18%,
+            #e7c869 34%,
+            #a87715 46%,
+            #f0d57e 54%,
+            #b88e2c 66%,
+            #6e470b 82%,
+            #cda94f 100%);
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+
+    animation: goldFoilShimmer 4s ease-in-out infinite;
+    filter: drop-shadow(0 1px 0 rgba(255,255,255,.6))
+            drop-shadow(0 3px 6px rgba(120,90,40,.25));
+}
+
+@keyframes goldFoilShimmer {
+    0%   { background-position: 100% 50%; }
+    50%  { background-position:   0% 50%; }
+    100% { background-position: 100% 50%; }
+}
+
+/* ============================================================
+   説明文
+   ============================================================ */
+.desc-section {
+    text-align: center;
+    padding: 16px 24px 8px;
+}
+.desc-section__lead {
+    font-size: .93rem;
+    color: var(--ink-soft);
+    margin-bottom: 10px;
+    font-weight: 400;
+    letter-spacing: .04em;
+}
+.desc-section__highlight {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--burgundy);
+    letter-spacing: .05em;
+    text-shadow: 0 1px 0 rgba(255,255,255,.5);
+}
+
+/* ============================================================
+   開催情報
+   ============================================================ */
+.info-section {
+    text-align: center;
+    padding: 12px 24px 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+}
+.info-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 20px;
+    background:
+        linear-gradient(180deg, rgba(255,255,255,.7), rgba(244,236,218,.5));
+    border: 1px solid rgba(177,141,60,.32);
+    border-radius: 40px;
+    box-shadow: 0 2px 6px rgba(120,90,40,.08), inset 0 1px 0 rgba(255,255,255,.6);
+}
+.info-icon { font-size: 1rem; flex-shrink: 0; }
+.info-text {
+    font-size: .93rem;
+    color: var(--ink);
+    font-weight: 500;
+    letter-spacing: .03em;
+}
+.info-text strong { color: var(--burgundy); font-weight: 700; }
+.info-yen {
+    font-family: var(--f-en);
+    font-weight: 700;
+    color: var(--gold-d);
+    margin: 0 2px;
+}
+
+/* ============================================================
+   カウントダウン — クリームパネル
+   ============================================================ */
+.countdown-section {
+    text-align: center;
+    padding: 12px 24px 44px;
+}
+.countdown-section__label {
+    font-family: var(--f-en);
+    font-size: .65rem;
+    letter-spacing: 5px;
+    color: var(--gold-d);
+    margin-bottom: 18px;
+    text-transform: uppercase;
+}
+
+.countdown-timer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.cd-unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+
+    background:
+        linear-gradient(180deg,
+            #fbf5e8 0%,
+            #f1e6cf 100%);
+    border: 1px solid rgba(177,141,60,.42);
+    border-radius: 8px;
+    padding: 14px 16px;
+    min-width: 72px;
+
+    box-shadow:
+        0 4px 12px rgba(120,90,40,.12),
+        0 1px 3px rgba(120,90,40,.10),
+        inset 0 1px 0 rgba(255,255,255,.8);
+}
+.cd-unit::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 45%;
+    background: linear-gradient(180deg,
+        rgba(255,255,255,.5) 0%,
+        transparent 100%);
+    pointer-events: none;
+}
+.cd-unit::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 10%; right: 10%;
+    height: 1px;
+    background: linear-gradient(90deg,
+        transparent, rgba(177,141,60,.5) 50%, transparent);
+}
+
+.cd-num {
+    font-family: var(--f-en);
+    font-size: 2.2rem;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 2px;
+    position: relative;
+    z-index: 1;
+
+    background: linear-gradient(170deg,
+        #a8821f 0%, #8a6c27 45%, #6e4f12 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 1px 0 rgba(255,255,255,.6));
+}
+
+.cd-label {
+    font-size: .6rem;
+    color: var(--ink-faint);
+    margin-top: 6px;
+    letter-spacing: 1.5px;
+    position: relative;
+    z-index: 1;
+    font-family: var(--f-en);
+}
+
+.cd-colon {
+    font-size: 1.8rem;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 20px;
+    background: linear-gradient(170deg, #b78a2e 0%, #8a6c27 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    opacity: .6;
+    animation: colonBlink 1s ease-in-out infinite;
+}
+@keyframes colonBlink {
+    0%,100% { opacity: .6; }
+    50%      { opacity: .2; }
+}
+
+.countdown-section__date {
+    font-size: .85rem;
+    color: var(--ink-soft);
+    letter-spacing: .07em;
+}
+
+/* ============================================================
+   申込ボタン — メタリックゴールド + シマー
+   ============================================================ */
+.apply-section {
+    text-align: center;
+    padding: 8px 24px 52px;
+}
+
+.apply-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+    cursor: pointer;
+
+    padding: 18px 40px;
+    border-radius: 100px;
+    border: 1px solid rgba(255,235,130,.75);
+
+    background:
+        radial-gradient(ellipse 80% 160% at 30% -20%,
+            rgba(255,255,230,.85) 0%,
+            rgba(255,240,150,.32) 34%,
+            transparent 58%),
+        linear-gradient(135deg,
+            #6b4308 0%,
+            #b07b16 12%,
+            #e0b33a 27%,
+            #fff0a8 45%,
+            #b9891e 54%,
+            #f6d76b 66%,
+            #a16e13 82%,
+            #4b2d05 100%);
+
+    color: #2a1000;
+    text-shadow: 0 1px 0 rgba(255,246,190,.45);
+    font-family: var(--f-sans);
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: .05em;
+
+    box-shadow:
+        0 0 0 1px rgba(90,55,0,.5),
+        0 4px 0 rgba(120,85,20,.55),
+        0 9px 18px rgba(120,90,40,.32),
+        0 18px 36px rgba(120,90,40,.20),
+        inset 0 2px 0 rgba(255,255,230,.7),
+        inset 0 -6px 12px rgba(70,38,0,.4);
+
+    transition: all .35s ease;
+}
+
+.apply-btn::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -80%;
+    width: 60%; height: 100%;
+    background: linear-gradient(105deg,
+        transparent 0%,
+        rgba(255,255,255,.0) 30%,
+        rgba(255,255,255,.5) 50%,
+        rgba(255,255,255,.0) 70%,
+        transparent 100%);
+    transform: skewX(-20deg);
+    animation: btnShimmer 3s ease-in-out infinite;
+}
+
+@keyframes btnShimmer {
+    0%   { left: -80%; opacity: 1; }
+    60%  { left: 120%; opacity: 1; }
+    100% { left: 120%; opacity: 0; }
+}
+
+.apply-btn::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 50%;
+    background: linear-gradient(180deg,
+        rgba(255,255,245,.42) 0%,
+        rgba(255,255,255,.12) 45%,
+        transparent 100%);
+    border-radius: 100px 100px 0 0;
+    pointer-events: none;
+}
+
+.apply-btn:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow:
+        0 0 0 1px rgba(160,110,0,.5),
+        0 6px 12px rgba(120,90,40,.32),
+        0 14px 30px rgba(120,90,40,.24),
+        inset 0 1px 0 rgba(255,255,255,.5),
+        inset 0 -2px 0 rgba(70,38,0,.25);
+}
+
+.apply-btn:active {
+    transform: translateY(-1px) scale(0.99);
+}
+
+.apply-btn__icon { font-size: 1rem; position: relative; z-index: 1; }
+.apply-btn__text { position: relative; z-index: 1; }
+.apply-btn__arrow { font-size: 1.15rem; font-weight: 900; position: relative; z-index: 1; }
+
+.apply-btn--large {
+    font-size: 1.1rem;
+    padding: 22px 52px;
+    gap: 14px;
+}
+
+/* ============================================================
+   当日のシェアストーリー登壇者
+   ============================================================ */
+.speakers-section {
+    text-align: center;
+    padding: 8px 24px 64px;
+}
+.speakers-section__label {
+    font-family: var(--f-en);
+    font-size: .62rem;
+    letter-spacing: 6px;
+    color: var(--gold-d);
+    margin-bottom: 12px;
+    text-transform: uppercase;
+}
+.speakers-section__title {
+    font-family: var(--f-serif);
+    font-size: clamp(1.5rem, 5vw, 2.1rem);
+    font-weight: 700;
+    color: var(--burgundy);
+    margin-bottom: 14px;
+    text-shadow: 0 1px 0 rgba(255,255,255,.5);
+}
+.speakers-section__lead {
+    font-size: .95rem;
+    color: var(--ink-soft);
+    line-height: 1.9;
+    letter-spacing: .03em;
+    margin-bottom: 38px;
+    text-wrap: pretty;
+}
+
+.speakers-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 26px;
+    max-width: 620px;
+    margin: 0 auto;
+}
+
+.speaker-card {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    background:
+        linear-gradient(155deg,
+            rgba(255,255,255,.75) 0%,
+            rgba(247,240,226,.55) 100%);
+    border: 1px solid rgba(177,141,60,.3);
+    border-radius: 14px;
+    padding: 32px 32px;
+    text-align: left;
+    transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+    box-shadow:
+        0 6px 20px rgba(120,90,40,.10),
+        inset 0 1px 0 rgba(255,255,255,.6);
+}
+.speaker-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg,
+        transparent, rgba(177,141,60,.5) 50%, transparent);
+}
+.speaker-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(177,141,60,.6);
+    box-shadow:
+        0 12px 30px rgba(120,90,40,.18),
+        0 0 18px rgba(177,141,60,.1);
+}
+
+/* 顔写真（丸）— ゴールドのリング */
+.speaker-card__photo {
+    flex-shrink: 0;
+    width: 148px;
+    height: 148px;
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+    border: 2px solid var(--gold);
+    box-shadow:
+        0 4px 14px rgba(120,90,40,.22),
+        inset 0 0 0 4px rgba(255,255,255,.65);
+    background: linear-gradient(160deg, #f3ead6, #e7d8bd);
+}
+
+/* テキスト側（名前＋紹介文） */
+.speaker-card__content {
+    flex: 1;
+    min-width: 0;
+}
+.speaker-card__photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+/* 「写真が入ります」ラベル（写真が入ると自動で消える） */
+.speaker-card__ph-label {
+    display: none;
+}
+.speaker-card__photo.is-empty .speaker-card__ph-label {
+    display: flex;
+    position: absolute;
+    inset: 0;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: .82rem;
+    font-weight: 700;
+    line-height: 1.5;
+    letter-spacing: .08em;
+    color: rgba(245,225,170,.95);
+    text-shadow: 0 1px 3px rgba(20,4,8,.6);
+}
+/* 写真が未設定のときのプレースホルダー（ワインレッド地に金のシルエット＋ラベル） */
+.speaker-card__photo.is-empty {
+    background:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23e8c46e' opacity='0.28'%3E%3Cpath d='M12 12c2.2 0 4-1.8 4-4s-1.8-4-4-4-4 1.8-4 4 1.8 4 4 4zm0 2c-3.3 0-8 1.7-8 5v1.2h16V19c0-3.3-4.7-5-8-5z'/%3E%3C/svg%3E") center 58% / 66% no-repeat,
+        linear-gradient(160deg, #7a2230 0%, #56121d 100%);
+}
+
+.speaker-card__name {
+    font-family: var(--f-serif);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--burgundy);
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    letter-spacing: .04em;
+    border-bottom: 1px solid rgba(177,141,60,.28);
+}
+.speaker-card__episode {
+    font-size: .92rem;
+    color: var(--ink-soft);
+    line-height: 2;
+    letter-spacing: .02em;
+    text-wrap: pretty;
+    min-height: 3.6em;
+}
+
+/* ============================================================
+   About BOD — クリームカード
+   ============================================================ */
+.about-section {
+    position: relative;
+    overflow: hidden;
+    padding: 72px 24px;
+    border-top: 1px solid rgba(177,141,60,.22);
+    border-bottom: 1px solid rgba(177,141,60,.22);
+}
+.about-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(180deg, rgba(255,255,255,.35), rgba(244,236,218,.25)),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+}
+
+.about-section__inner {
+    max-width: 760px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+.about-section__label {
+    font-family: var(--f-en);
+    font-size: .62rem;
+    letter-spacing: 6px;
+    color: var(--gold-d);
+    margin-bottom: 12px;
+    display: block;
+    text-align: center;
+    text-transform: uppercase;
+}
+.about-section__title {
+    font-family: var(--f-serif);
+    font-size: clamp(1.5rem, 5vw, 2.1rem);
+    font-weight: 700;
+    color: var(--burgundy);
+    text-align: center;
+    margin-bottom: 36px;
+    text-shadow: 0 1px 0 rgba(255,255,255,.5);
+}
+.about-section__body {
+    max-width: 680px;
+    margin: 0 auto 52px;
+    text-align: center;
+}
+.about-section__body p {
+    font-size: clamp(.94rem, 2.5vw, 1.02rem);
+    color: var(--ink-soft);
+    line-height: 2.15;
+    letter-spacing: .035em;
+    margin-bottom: 20px;
+    text-wrap: pretty;
+}
+.about-section__body p:last-child {
+    margin-bottom: 0;
+}
+.about-section__body strong { color: var(--burgundy); }
+
+.about-points {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 18px;
+}
+
+.about-point {
+    position: relative;
+    overflow: hidden;
+    background:
+        linear-gradient(145deg,
+            rgba(255,255,255,.7) 0%,
+            rgba(247,240,226,.5) 100%);
+    border: 1px solid rgba(177,141,60,.3);
+    border-radius: 10px;
+    padding: 30px 20px 26px;
+    text-align: center;
+    transition: all .4s ease;
+    box-shadow: 0 4px 14px rgba(120,90,40,.08), inset 0 1px 0 rgba(255,255,255,.6);
+}
+.about-point::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg,
+        transparent, rgba(177,141,60,.5) 50%, transparent);
+}
+.about-point:hover {
+    border-color: rgba(177,141,60,.6);
+    transform: translateY(-5px);
+    box-shadow:
+        0 12px 28px rgba(120,90,40,.16),
+        0 0 18px rgba(177,141,60,.10);
+}
+.about-point__icon {
+    font-size: 2.2rem;
+    margin-bottom: 14px;
+    display: block;
+    filter: drop-shadow(0 2px 4px rgba(120,90,40,.25));
+}
+.about-point h3 {
+    font-size: .9rem;
+    font-weight: 700;
+    color: var(--burgundy);
+    margin-bottom: 10px;
+    letter-spacing: .04em;
+}
+.about-point p {
+    font-size: .84rem;
+    color: var(--ink-soft);
+    line-height: 1.95;
+    letter-spacing: .025em;
+    text-wrap: pretty;
+}
+
+/* ============================================================
+   最下部CTA — 柔らかなクリームパネル
+   ============================================================ */
+.bottom-cta {
+    position: relative;
+    padding: 88px 24px 96px;
+    overflow: hidden;
+}
+
+.bottom-cta::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse 90% 70% at 50% 35%,
+            rgba(255,255,255,.45) 0%,
+            transparent 70%),
+        linear-gradient(180deg,
+            rgba(247,240,226,.5) 0%,
+            rgba(238,228,206,.6) 100%);
+    pointer-events: none;
+}
+
+.bottom-cta::after {
+    content: '';
+    position: absolute;
+    inset: 20px;
+    border: 1px solid rgba(177,141,60,.22);
+    border-radius: 6px;
+    pointer-events: none;
+}
+
+.bottom-cta > .bottom-cta__topline {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(177,141,60,.3) 20%,
+        rgba(205,169,79,.75) 50%,
+        rgba(177,141,60,.3) 80%,
+        transparent 100%);
+}
+
+.bottom-cta__inner {
+    position: relative;
+    z-index: 1;
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 22px;
+}
+
+.bottom-cta__deco {
+    font-size: 1.8rem;
+    line-height: 1;
+    background: linear-gradient(170deg, #cda94f 0%, #b18d3c 60%, #8a6c27 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 1px 2px rgba(120,90,40,.25));
+    animation: decoGlow 3s ease-in-out infinite;
+}
+@keyframes decoGlow {
+    0%,100% { filter: drop-shadow(0 0 4px rgba(177,141,60,.25)); }
+    50%      { filter: drop-shadow(0 0 10px rgba(205,169,79,.5)); }
+}
+
+.bottom-cta__eyebrow {
+    font-family: var(--f-en);
+    font-size: .68rem;
+    letter-spacing: 5px;
+    color: var(--gold-d);
+}
+.bottom-cta__title {
+    font-family: var(--f-serif);
+    font-size: clamp(1.4rem, 5vw, 2rem);
+    font-weight: 700;
+    color: var(--burgundy);
+    line-height: 1.45;
+    text-shadow: 0 1px 0 rgba(255,255,255,.5);
+}
+.bottom-cta__body {
+    max-width: 560px;
+    font-size: clamp(.94rem, 2.5vw, 1.02rem);
+    color: var(--ink-soft);
+    line-height: 2.12;
+    letter-spacing: .035em;
+    text-wrap: pretty;
+}
+.bottom-cta__body strong { color: var(--burgundy); }
+
+.bottom-cta__info {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px 18px;
+    padding: 18px 24px;
+    background:
+        linear-gradient(135deg,
+            rgba(255,255,255,.7) 0%,
+            rgba(247,240,226,.55) 100%);
+    border: 1px solid rgba(177,141,60,.3);
+    border-radius: 10px;
+    width: 100%;
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.6),
+        0 4px 14px rgba(120,90,40,.10);
+}
+.bottom-cta__info span {
+    font-size: .88rem;
+    color: var(--ink);
+    white-space: nowrap;
+}
+
+.bottom-cta__note {
+    font-size: .73rem;
+    color: var(--ink-faint);
+    margin-top: -8px;
+    letter-spacing: .04em;
+}
+
+/* ============================================================
+   フッター
+   ============================================================ */
+.footer {
+    text-align: center;
+    padding: 44px 24px;
+    border-top: 1px solid rgba(177,141,60,.22);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+}
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 20%; right: 20%;
+    height: 1px;
+    background: linear-gradient(90deg,
+        transparent, rgba(177,141,60,.45) 50%, transparent);
+}
+.footer__chapter {
+    font-family: var(--f-en);
+    font-size: .72rem;
+    letter-spacing: 4.5px;
+    color: var(--gold-d);
+}
+.footer__copy {
+    font-size: .68rem;
+    color: var(--ink-faint);
+    letter-spacing: .05em;
+    margin-top: 6px;
+}
+
+/* ============================================================
+   スパークルアニメ
+   ============================================================ */
+@keyframes sparkleAnim {
+    0%   { opacity:1; transform:translate(0,0) scale(1) rotate(0deg); }
+    100% { opacity:0; transform:translate(var(--sx),var(--sy)) scale(.15) rotate(var(--sr)); }
+}
+
+/* ============================================================
+   スクロールフェードイン
+   ============================================================ */
+.fade-up {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity .7s ease, transform .7s ease;
+}
+.fade-up.in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ============================================================
+   背景パーティクル — ふわっと舞う淡いゴールドダスト
+   ============================================================ */
+.bg-particles {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+.bg-particles .gp {
+    position: absolute;
+    bottom: -20px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%,
+        rgba(214,184,110,.85) 0%,
+        rgba(177,141,60,.55) 45%,
+        rgba(177,141,60,.12) 100%);
+    box-shadow: 0 0 5px rgba(177,141,60,.35);
+    opacity: 0;
+    will-change: transform, opacity;
+    animation-name: floatUp;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+}
+@keyframes floatUp {
+    0%   { transform: translate(0, 0) scale(.6);          opacity: 0; }
+    10%  { opacity: var(--gp-op, .5); }
+    50%  { transform: translate(var(--gp-x, 20px), -52vh) scale(1); }
+    90%  { opacity: var(--gp-op, .5); }
+    100% { transform: translate(calc(var(--gp-x, 20px) * -1), -104vh) scale(.5); opacity: 0; }
+}
+.page { position: relative; z-index: 1; }
+
+/* ============================================================
+   開封後スクロール誘導インジケーター
+   ============================================================ */
+.scroll-cue {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    margin: 22px auto 0;
+    opacity: 0;
+    transform: translateY(-6px);
+    transition: opacity .6s ease, transform .6s ease;
+    pointer-events: none;
+}
+.scroll-cue.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+.scroll-cue__text {
+    font-family: var(--f-en);
+    font-size: .6rem;
+    letter-spacing: 4px;
+    color: var(--gold-d);
+    text-transform: uppercase;
+}
+.scroll-cue__chevron {
+    width: 16px;
+    height: 16px;
+    border-right: 2px solid var(--gold);
+    border-bottom: 2px solid var(--gold);
+    transform: rotate(45deg);
+    animation: cueBounce 1.6s ease-in-out infinite;
+    filter: drop-shadow(0 1px 2px rgba(120,90,40,.3));
+}
+@keyframes cueBounce {
+    0%,100% { transform: rotate(45deg) translate(0,0);   opacity: .5; }
+    50%     { transform: rotate(45deg) translate(4px,4px); opacity: 1; }
+}
+
+/* ============================================================
+   封筒カード 初回出現演出
+   ============================================================ */
+.card-outer {
+    animation: cardReveal 1.1s cubic-bezier(.22,1,.36,1) both;
+}
+@keyframes cardReveal {
+    0%   { opacity: 0; transform: translateY(40px) scale(.96); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* アニメーションを控える設定のユーザーには配慮 */
+@media (prefers-reduced-motion: reduce) {
+    .bg-particles .gp,
+    .scroll-cue__chevron,
+    .env-hint,
+    .env-hint span,
+    .env-hint span::before,
+    .env-hint__finger,
+    .env-hint__arrow,
+    .card-outer { animation: none !important; }
+    .card-outer { opacity: 1; transform: none; }
+}
+
+/* ============================================================
+   レスポンシブ
+   ============================================================ */
+@media (max-width: 600px) {
+    .env-decor--left,
+    .env-decor--right { display: none; }
+
+    .apply-btn { font-size: .9rem; padding: 15px 28px; gap: 8px; }
+    .apply-btn--large { font-size: 1rem; padding: 18px 32px; }
+
+    .cd-unit { padding: 12px 10px; min-width: 60px; }
+    .cd-num  { font-size: 1.8rem; }
+
+    .card-outer .corner-bl,
+    .card-outer .corner-br,
+    .corner-tl, .corner-tr {
+        width: 28px; height: 28px;
+        top: 10px; bottom: 10px;
+    }
+
+    /* 登壇者カードはスマホで縦積みに */
+    .speaker-card {
+        flex-direction: column;
+        text-align: center;
+        gap: 18px;
+        padding: 28px 22px;
+    }
+    .speaker-card__name {
+        font-size: 1.12rem;
+    }
+    .speaker-card__episode {
+        min-height: 0;
+    }
+
+    .about-section__body,
+    .bottom-cta__body {
+        text-align: left;
+    }
+
+    .about-section__body p,
+    .bottom-cta__body {
+        line-height: 2;
+        letter-spacing: .02em;
+    }
+
+    .text-break {
+        display: none;
+    }
+}
